@@ -1,39 +1,22 @@
 from asci_codes import BOLD, RED, GREEN, YELLOW, RESET
+from enum import Enum, auto
+from conflict_categorizer import ConflictType, get_conflict_type
 
-def process_conflicts(merge_output):
-    lines = merge_output.split('\n')
+def format_number_of_conflicts(categorized_conflicts):
+    total_conflicts = sum(len(conflicts) for conflicts in categorized_conflicts.values())
+    if total_conflicts == 0:
+        print(f"\n> We found {BOLD}{GREEN}{total_conflicts}{RESET} conflicts.")
+        return
+    else:
+        print(f"\n> We found {BOLD}{RED}{total_conflicts}{RESET} conflicts.")
 
-    # Check if it's a merge operation
-    if not any(line.strip().startswith("Auto-merging") for line in lines):
-        return None, None  # Indicate that this wasn't a merge operation
-
-    content_conflicts = []
-    other_conflicts = []
-
-    # iterate through lines and filter out conflict messages
-    for line in lines:
-        if line.startswith("CONFLICT"):
-            if "(content):" in line:
-                content_conflicts.append(line)
-            else:
-                other_conflicts.append(line.strip())
-
-    return content_conflicts, other_conflicts
-
-def format_content_conflicts(content_conflicts):
-    print(f"\n{BOLD}{RED}Content Conflicts:{RESET}")
-    for conflict in content_conflicts:
-        file_path = conflict.split("in ")[-1].strip()
-        print(f"* {file_path}")
-
-def format_other_conflicts(other_conflicts):
-    print(f"\n{BOLD}{RED}Other Conflicts:{RESET}")
-    for conflict in other_conflicts:
-        # Extract the conflict type from within parentheses
-        conflict_type = conflict.split('(')[1].split(')')[0]
-        
-        # Remove the "CONFLICT (type): " prefix from the message
-        conflict_message = conflict.split(': ', 1)[1]
-        
-        # Print the formatted conflict line
-        print(f"- {BOLD}{conflict_type}{RESET}: {conflict_message}")
+def format_conflicts(categorized_conflicts):
+    for conflict_type, conflicts in categorized_conflicts.items():
+        if conflicts:
+            header = get_conflict_type(conflict_type)
+            print(f"\n{BOLD}{RED}{header}{RESET}")
+            for file, state in conflicts:
+                if conflict_type == ConflictType.CONTENT:
+                    print(f"* {file}")
+                else:
+                    print(f"* {file} ({state})")

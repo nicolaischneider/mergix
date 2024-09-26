@@ -5,23 +5,29 @@ import re
 
 def get_merge_conflicts():
     try:
-        # Run 'git status' command
         status_output = subprocess.check_output(['git', 'status'], universal_newlines=True)
         
         # Check if we're in a merge state
         if "You have unmerged paths." not in status_output:
             return None
 
-        # Use regex to find conflicting files and their states
-        conflict_pattern = re.compile(r'\t(.*?):\s*(.*)')
-        conflicts = conflict_pattern.findall(status_output)
+        # Extract only the unmerged paths section
+        unmerged_section = re.search(r'Unmerged paths:.*?(?=\n\n|\Z)', status_output, re.DOTALL)
+        if not unmerged_section:
+            return None
+
+        unmerged_output = unmerged_section.group(0)
+
+        # Use regex to find conflicting files and their states, excluding header lines
+        conflict_pattern = re.compile(r'\t(\w+.*?):\s*(.*)')
+        conflicts = conflict_pattern.findall(unmerged_output)
 
         return conflicts
 
     except subprocess.CalledProcessError:
         return None
-# simulated output
 
+# simulated output
 def get_simulated_merge_output(case=0):
     outputs = {
         0: """
