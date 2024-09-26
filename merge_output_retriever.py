@@ -1,41 +1,44 @@
 #!/usr/bin/env python3
 import os
 import subprocess
+import re
 
-def get_git_root():
+def get_merge_conflicts():
     try:
-        return subprocess.check_output(['git', 'rev-parse', '--show-toplevel'], 
-                                       universal_newlines=True).strip()
+        # Run 'git status' command
+        status_output = subprocess.check_output(['git', 'status'], universal_newlines=True)
+        
+        # Check if we're in a merge state
+        if "You have unmerged paths." not in status_output:
+            return None
+
+        # Use regex to find conflicting files and their states
+        conflict_pattern = re.compile(r'\t(.*?):\s*(.*)')
+        conflicts = conflict_pattern.findall(status_output)
+
+        return conflicts
+
     except subprocess.CalledProcessError:
         return None
-
-def get_merge_message():
-    git_root = get_git_root()
-    if not git_root:
-        return None
-
-    merge_msg_path = os.path.join(git_root, '.git', 'MERGE_MSG')
-    if not os.path.exists(merge_msg_path):
-        return None
-
-    with open(merge_msg_path, 'r') as file:
-        return file.read()
-
 # simulated output
 
 def get_simulated_merge_output(case=0):
     outputs = {
         0: """
-Auto-merging src/main.py
-CONFLICT (content): Merge conflict in src/main.py
-Auto-merging lib/utils.py
-CONFLICT (content): Merge conflict in lib/utils.py
-Auto-merging tests/test_api.py
-CONFLICT (content): Merge conflict in tests/test_api.py
-CONFLICT (modify/delete): config.ini deleted in HEAD and modified in feature-branch. Version feature-branch of config.ini left in tree.
-CONFLICT (modify/delete): docs/README.md deleted in feature-branch and modified in HEAD. Version HEAD of docs/README.md left in tree.
-CONFLICT (content): Merge conflict in lib/test.py
-Automatic merge failed; fix conflicts and then commit the result.
+On branch master
+You have unmerged paths.
+  (fix conflicts and run "git commit")
+  (use "git merge --abort" to abort the merge)
+
+Changes to be committed:
+	renamed:    dir1/file4.txt -> file3_renamed.txt
+
+Unmerged paths:
+  (use "git add/rm <file>..." as appropriate to mark resolution)
+	both modified:   file1.txt
+	deleted by them: file2.txt
+	deleted by them: file3.txt
+	both added:      new_file.txt
 """,
         1: """
 Auto-merging README.md
