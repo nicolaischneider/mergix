@@ -2,7 +2,7 @@
     <img src="mergix_theme.png" width="1000" alt="Mergix"/>
 </p>
 
-# MERGIX
+# Mergix
 
 Mergix is a simple Python tool that enhances Git merge conflict resolution by providing a clear, categorized view of conflicts.
 
