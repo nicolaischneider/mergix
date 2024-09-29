@@ -9,11 +9,13 @@ def get_merge_conflicts():
         
         # Check if we're in a merge state
         if "You have unmerged paths." not in status_output:
+            print("No merge in progress")
             return None
 
         # Extract only the unmerged paths section
         unmerged_section = re.search(r'Unmerged paths:.*?(?=\n\n|\Z)', status_output, re.DOTALL)
         if not unmerged_section:
+            print("Unmerged paths not found in git status output")
             return None
 
         unmerged_output = unmerged_section.group(0)
@@ -25,6 +27,7 @@ def get_merge_conflicts():
         return conflicts
 
     except subprocess.CalledProcessError:
+        print("Error: Not a git repository")
         return None
 
 # simulated output

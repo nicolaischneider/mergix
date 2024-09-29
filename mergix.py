@@ -10,7 +10,6 @@ def mergix():
     conflicts = get_merge_conflicts()
 
     if conflicts is None:
-        print("No merge conflicts found or not in a Git repository.")
         return
 
     # categorize into types
