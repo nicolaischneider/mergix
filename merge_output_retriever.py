@@ -18,7 +18,7 @@ def get_merge_conflicts():
         unmerged_section = re.search(
             r'Unmerged paths:.*?(?=\n\n|\Z)', status_output, re.DOTALL)
         if not unmerged_section:
-            print("Unmerged paths not found in git status output")
+            print("Unmerged paths not found in git status output.")
             return None
 
         unmerged_output = unmerged_section.group(0)
@@ -34,7 +34,6 @@ def get_merge_conflicts():
         return None
 
 # simulated output
-
 
 def get_simulated_merge_output(case=0):
     outputs = {
