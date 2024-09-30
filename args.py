@@ -7,7 +7,6 @@ def parse_arguments():
         description="Manage and display information about content conflicts in files.",
         epilog="Example usage: mergix    # Shows all conflicts in a more structured way"
     )
-    #group = parser.add_mutually_exclusive_group()
 
     # Argument to open files in IDE
     parser.add_argument("-o", "--open", metavar="IDE_COMMAND",
