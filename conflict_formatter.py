@@ -38,7 +38,6 @@ def open_files_with_conflicts(ide_command, conflicts):
     content_conflicts = conflicts.get(ConflictType.CONTENT, [])
 
     for file, _ in content_conflicts:
-        print(f"Opening {file} with command: {ide_command} {file}")
         try:
             subprocess.run([ide_command, file], check=True)
         except subprocess.CalledProcessError as e:
