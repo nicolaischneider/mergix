@@ -36,6 +36,7 @@ def get_merge_conflicts():
 
 # simulated output
 
+
 def get_simulated_merge_output(case=0):
     outputs = {
         0: """
