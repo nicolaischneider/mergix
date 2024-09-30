@@ -19,6 +19,4 @@ def mergix(args):
     format_number_of_conflicts(categorized_conflicts)
 
     # print conflicts
-    format_conflicts(categorized_conflicts)
-
-    print("")
+    format_conflicts(args, categorized_conflicts)

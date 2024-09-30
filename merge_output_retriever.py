@@ -6,7 +6,9 @@ import re
 
 def get_merge_conflicts():
     try:
-        status_output = get_simulated_merge_output(0)
+        status_output = subprocess.check_output(
+            ['git', 'status'], universal_newlines=True)
+        #get_simulated_merge_output(0)
         #subprocess.check_output(
          #   ['git', 'status'], universal_newlines=True)
 
@@ -49,7 +51,7 @@ Changes to be committed:
 
 Unmerged paths:
   (use "git add/rm <file>..." as appropriate to mark resolution)
-	both modified:   file1.txt
+	both modified:   README.md
 	deleted by them: file2.txt
 	deleted by them: file3.txt
 	both added:      new_file.txt
