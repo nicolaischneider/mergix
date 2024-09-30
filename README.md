@@ -18,3 +18,13 @@ Mergix helps developers quickly understand and navigate merge conflicts, streaml
 1. Runs `git status` to detect merge conflicts
 2. Categorizes conflicts (e.g., content conflicts, rename conflicts)
 3. Displays a formatted summary of all conflicts
+
+## ToDos for Release
+
+- [ ] add arguments (help, option to open files, ...)
+- [ ] review all error strings
+- [ ] option to show amount of conflicts per file (also the range)
+- [ ] open in respective IDE
+- [ ] updated documentation based on last changes
+- [ ] pep8 formatting (`autopep8 -i -r .`)
+- [ ] packaging for easy installation using `pip`
