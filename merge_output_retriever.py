@@ -3,17 +3,20 @@ import os
 import subprocess
 import re
 
+
 def get_merge_conflicts():
     try:
-        status_output = subprocess.check_output(['git', 'status'], universal_newlines=True)
-        
+        status_output = subprocess.check_output(
+            ['git', 'status'], universal_newlines=True)
+
         # Check if we're in a merge state
         if "You have unmerged paths." not in status_output:
             print("No merge in progress")
             return None
 
         # Extract only the unmerged paths section
-        unmerged_section = re.search(r'Unmerged paths:.*?(?=\n\n|\Z)', status_output, re.DOTALL)
+        unmerged_section = re.search(
+            r'Unmerged paths:.*?(?=\n\n|\Z)', status_output, re.DOTALL)
         if not unmerged_section:
             print("Unmerged paths not found in git status output")
             return None
@@ -31,6 +34,8 @@ def get_merge_conflicts():
         return None
 
 # simulated output
+
+
 def get_simulated_merge_output(case=0):
     outputs = {
         0: """
@@ -55,5 +60,5 @@ Auto-merging tests/test_api.py
 """,
         2: "Some Output"
     }
-    
+
     return outputs.get(case, "Invalid case specified. Please use 0, 1 or 2.")

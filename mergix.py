@@ -4,6 +4,7 @@ from merge_output_retriever import get_merge_conflicts, get_simulated_merge_outp
 from conflict_categorizer import categorize_conflicts
 from conflict_formatter import format_number_of_conflicts, format_conflicts
 
+
 def mergix():
 
     # access conflicts
@@ -22,6 +23,7 @@ def mergix():
     format_conflicts(categorized_conflicts)
 
     print("")
+
 
 if __name__ == "__main__":
     mergix()

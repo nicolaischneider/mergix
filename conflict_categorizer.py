@@ -1,5 +1,6 @@
 from enum import Enum, auto
 
+
 class ConflictType(Enum):
     CONTENT = auto()
     MODIFY_DELETE = auto()
@@ -8,6 +9,7 @@ class ConflictType(Enum):
     MODE_CHANGE = auto()
     SUBMODULE = auto()
     UNKNOWN = auto()
+
 
 def get_conflict_type(conflict_type):
     conflict_messages = {
@@ -20,6 +22,7 @@ def get_conflict_type(conflict_type):
         ConflictType.UNKNOWN: "Unknown Conflicts:"
     }
     return conflict_messages[conflict_type]
+
 
 def categorize_conflicts(conflicts):
     categorized_conflicts = {
