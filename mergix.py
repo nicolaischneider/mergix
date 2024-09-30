@@ -5,8 +5,7 @@ from conflict_categorizer import categorize_conflicts
 from conflict_formatter import format_number_of_conflicts, format_conflicts
 
 
-def mergix():
-
+def mergix(args):
     # access conflicts
     conflicts = get_merge_conflicts()
 
@@ -23,7 +22,3 @@ def mergix():
     format_conflicts(categorized_conflicts)
 
     print("")
-
-
-if __name__ == "__main__":
-    mergix()

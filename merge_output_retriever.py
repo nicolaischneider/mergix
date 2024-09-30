@@ -6,8 +6,9 @@ import re
 
 def get_merge_conflicts():
     try:
-        status_output = subprocess.check_output(
-            ['git', 'status'], universal_newlines=True)
+        status_output = get_simulated_merge_output(0)
+        #subprocess.check_output(
+         #   ['git', 'status'], universal_newlines=True)
 
         # Check if we're in a merge state
         if "You have unmerged paths." not in status_output:
