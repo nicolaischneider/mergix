@@ -8,23 +8,21 @@ Mergix is a simple Python tool that enhances Git merge conflict resolution by pr
 
 ## Usage
 
-```
-python mergix.py
-```
-Mergix helps developers quickly understand and navigate merge conflicts, streamlining the resolution process.
+The following are the optional parameters that can be added.
 
-## How it works
+- `-o IDE_COMMAND`: Open all files with content conflicts in the specified IDE. Replace `IDE_COMMAND` with the command to launch your preferred IDE (e.g., `code` for Visual Studio Code, `vim` for Vim).
+- `-i`: Show detailed information for all content conflicts.
 
-1. Runs `git status` to detect merge conflicts
-2. Categorizes conflicts (e.g., content conflicts, rename conflicts)
-3. Displays a formatted summary of all conflicts
+### Examples:
 
-## ToDos for Release
+1. To open files with conflicts in Visual Studio Code:
+   ```
+   mergix -o code
+   ```
 
-- [x]] add arguments (help, option to open files, ...)
-- [x] review all error strings
-- [x] option to show amount of conflicts per file (also the range)
-- [x] open in respective IDE
-- [ ] updated documentation based on last changes
-- [ ] pep8 formatting (`autopep8 -i -r .`)
-- [ ] packaging for easy installation using `pip`
+2. To display detailed information about content conflicts:
+   ```
+   mergix -i
+   ```
+
+Note: Make sure you run the script from the root directory of your Git repository where the conflicts are present.
