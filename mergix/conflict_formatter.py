@@ -34,6 +34,7 @@ def format_conflicts(args, categorized_conflicts):
 
 # Open Conflicts
 
+
 def open_files_with_conflicts(ide_command, conflicts):
     content_conflicts = conflicts.get(ConflictType.CONTENT, [])
 
@@ -43,15 +44,17 @@ def open_files_with_conflicts(ide_command, conflicts):
         except subprocess.CalledProcessError as e:
             print(f"Error opening {file}: {e}")
         except FileNotFoundError:
-            print(f"IDE command '{ide_command}' not found. Please make sure it's installed and in your PATH.")
+            print(
+                f"IDE command '{ide_command}' not found. Please make sure it's installed and in your PATH.")
 
 # Show Conflict Detail Info
+
 
 def analyze_file_conflicts(filename):
     try:
         with open(filename, 'r') as file:
             content = file.readlines()
-        
+
         conflicts = []
         current_conflict_start = None
         for i, line in enumerate(content, start=1):
@@ -60,7 +63,7 @@ def analyze_file_conflicts(filename):
             elif line.startswith('>>>>>>>') and current_conflict_start is not None:
                 conflicts.append((current_conflict_start, i))
                 current_conflict_start = None
-        
+
         return len(conflicts), conflicts
     except FileNotFoundError:
         print(f"File not found: {filename}")
@@ -69,10 +72,12 @@ def analyze_file_conflicts(filename):
         print(f"Error analyzing {filename}: {e}")
         return 0, []
 
+
 def show_conflict_info(file, show_info):
     if show_info:
         num_conflicts, ranges = analyze_file_conflicts(file)
-        print(f"* {file} ({RED}{num_conflicts}{RESET} conflict{'s' if num_conflicts != 1 else ''})")
+        print(
+            f"* {file} ({RED}{num_conflicts}{RESET} conflict{'s' if num_conflicts != 1 else ''})")
         for start, end in ranges:
             print(f"   > lines {start}-{end}")
     else:
