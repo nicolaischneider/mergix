@@ -1,6 +1,6 @@
-from asci_codes import BOLD, RED, GREEN, YELLOW, RESET
+from .asci_codes import BOLD, RED, GREEN, YELLOW, RESET
+from .conflict_categorizer import ConflictType, get_conflict_type
 from enum import Enum, auto
-from conflict_categorizer import ConflictType, get_conflict_type
 import subprocess
 import re
 
