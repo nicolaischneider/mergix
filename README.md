@@ -7,15 +7,16 @@
 Mergix is a simple Python tool that enhances Git merge conflict resolution by providing a clear, categorized view of conflicts.
 
 ## Install
+Use `pip` or `pip3` to install `mergix` to your terminal ready for use:
 ```
-pip install git+https://github.com/nicolaischneider/mergix.git
+$ pip install git+https://github.com/nicolaischneider/mergix.git
 ```
 
 ## Usage
 
 After calling `git merge <your_branch>` (which may have caused some merge conflict), simply call the following command to get a better view of your conflicts:
 ```
-mergix
+$ mergix
 ```
 
 The following are optional parameters that can be added for more info:
